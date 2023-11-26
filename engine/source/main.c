@@ -6,7 +6,11 @@
  */
 
 #include <stdio.h>
+#include "engine/include/module.h"
 
 int main(int const argc, char const* const* const argv){
     printf("chess is cool\n");
+    Module_Print();
+
+    return 0;
 }

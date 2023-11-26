@@ -1,66 +1,80 @@
 #
-# Compiler flags
+# Compiler settings
 #
+BASE_DIR = ../
 CC := C:\msys64\mingw64\bin\gcc.exe
-CFLAGS = -Wall -Wextra
+CFLAGS := -Wall -Wextra -I$(BASE_DIR)
+
+.PHONY: all clean debug prepdbg release preprel remake
+all: release
 
 #
 # Project files
 #
-SRCS = main.c
-OBJS = $(SRCS:.c=.o)
-EXE  = exefile
-
-#
-# Debug build settings
-#
-DBGDIR = debug
-DBGEXE = $(DBGDIR)/$(EXE)
-DBGOBJS = $(addprefix $(DBGDIR)/, $(OBJS))
-DBGCFLAGS = -g -O0 -DDEBUG
+SRCDIR = source
+#INCDIR = include
+#DEPS = module.h
+SRCS = main.c module.c
+EXENAME  = runable
 
 #
 # Release build settings
 #
 RELDIR = release
-RELEXE = $(RELDIR)/$(EXE)
-RELOBJS = $(addprefix $(RELDIR)/, $(OBJS))
-RELCFLAGS = -O3 -DNDEBUG
-
-.PHONY: all clean debug prep release remake
-
-# Default build
-all: prep release
-
-#
-# Debug rules
-#
-debug: $(DBGEXE)
-
-$(DBGEXE): $(DBGOBJS)
-	$(CC) $(CFLAGS) $(DBGCFLAGS) -o $(DBGEXE) $^
-
-$(DBGDIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(DBGCFLAGS) -o $@ $<
+RELEXE = $(RELDIR)/$(EXENAME)
+RELOBJS = $(addprefix $(RELDIR)/, $(SRCS:.c=.o))
+release: CFLAGS += -O3 -DNDEBUG
 
 #
 # Release rules
 #
-release: $(RELEXE)
+release: preprel $(RELEXE)
+	@echo release target finished succesfully
+
+preprel:
+	@mkdir -p $(RELDIR)
 
 $(RELEXE): $(RELOBJS)
-	$(CC) $(CFLAGS) $(RELCFLAGS) -o $(RELEXE) $^
+	@echo
+	@echo linking $(RELEXE)
+	$(CC) $(CFLAGS) -o $(RELEXE) $^
 
-$(RELDIR)/%.o: %.c
-	$(CC) -c $(CFLAGS) $(RELCFLAGS) -o $@ $<
+$(RELDIR)/%.o: $(SRCDIR)/%.c
+	@echo compiling $@
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+#
+# Debug build settings
+#
+DBGDIR = debug
+DBGEXE = $(DBGDIR)/$(EXENAME)
+DBGOBJS = $(addprefix $(DBGDIR)/, $(SRCS:.c=.o))
+debug: CFLAGS += -ggdb3 -O0 -DDEBUG
+
+#
+# Debug rules
+#
+debug: prepdbg $(DBGEXE)
+	@echo debug target finished succesfully
+
+prepdbg:
+	@mkdir -p $(DBGDIR)
+
+$(DBGEXE): $(DBGOBJS)
+	@echo
+	@echo linking $(DBGEXE)
+	$(CC) $(CFLAGS) -o $(DBGEXE) $^
+
+$(DBGDIR)/%.o: $(SRCDIR)/%.c
+	@echo compiling $@
+	$(CC) -c $(CFLAGS) -o $@ $(SRCDIR)/$<
 
 #
 # Other rules
 #
-prep:
-	@mkdir -p $(DBGDIR) $(RELDIR)
-
 remake: clean all
 
 clean:
-	rm -f $(RELEXE) $(RELOBJS) $(DBGEXE) $(DBGOBJS)
+	@echo cleaning all build dirs:
+	rm -rf $(RELDIR) $(DBGDIR)
+	@echo
