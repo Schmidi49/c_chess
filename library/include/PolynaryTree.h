@@ -21,7 +21,17 @@ PolyTree_Node_t* PolyTree_New(void* pData);
 
 PolyTree_Node_t* PolyTree_PushBack(PolyTree_Node_t* pRoot, void* pData);
 
-void** PolyTree_CreateBack(PolyTree_Node_t* pRoot, size_t n);
+size_t PolyTree_PushBackHorizontal(PolyTree_Node_t* pRoot, size_t count, ...);
+
+size_t PolyTree_PushBackVertical(PolyTree_Node_t* pRoot, size_t count, ...);
+
+PolyTree_Node_t* PolyTree_CopyBack(PolyTree_Node_t* pRoot, size_t n, void* pData);
+
+size_t PolyTree_CopyBackHorizontal(PolyTree_Node_t* pRoot, size_t n, size_t count, ...);
+
+size_t PolyTree_CopyBackVertical(PolyTree_Node_t* pRoot, size_t n, size_t count, ...);
+
+PolyTree_Node_t* PolyTree_CreateBack(PolyTree_Node_t* pRoot, size_t n);
 
 void PolyTree_VisitPreOrder(PolyTree_Node_t* pRoot, PolyTree_Visitor_t visitor);
 

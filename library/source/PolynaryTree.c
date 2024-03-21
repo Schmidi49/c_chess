@@ -5,6 +5,8 @@
 #include "PolynaryTree.h"
 
 #include <stdlib.h>
+#include <string.h>
+#include <stdarg.h>
 
 typedef PolyTree_Node_t Node_t;
 
@@ -64,7 +66,106 @@ PolyTree_Node_t* PolyTree_PushBack(PolyTree_Node_t* pRoot, void* pData){
   return pNewNode;
 }
 
-void** PolyTree_CreateBack(PolyTree_Node_t* pRoot, size_t n){
+size_t PolyTree_PushBackHorizontal(PolyTree_Node_t* pRoot, size_t count, ...){
+  PolyTree_Node_t* pCur;
+  void* arg;
+  va_list args;
+
+  if(pRoot == NULL){
+    return count;
+  }
+
+  va_start(args, count);
+
+  while(count--){
+    arg = va_arg(args, void*);
+    pCur = PolyTree_PushBack(pRoot, arg);
+    if(pCur == NULL){
+      return count + 1;
+    }
+  }
+  va_end(args);
+  return count;
+}
+
+size_t PolyTree_PushBackVertical(PolyTree_Node_t* pRoot, size_t count, ...){
+  PolyTree_Node_t* pCur;
+  void* arg;
+  va_list args;
+
+  if(pRoot == NULL){
+    return count;
+  }
+
+  pCur = pRoot;
+  va_start(args, count);
+
+  while(count--){
+    arg = va_arg(args, void*);
+    pCur = PolyTree_PushBack(pCur, arg);
+    if(pCur == NULL){
+      return count + 1;
+    }
+  }
+  va_end(args);
+  return count;
+}
+
+PolyTree_Node_t* PolyTree_CopyBack(PolyTree_Node_t* pRoot, size_t n, void* pData){
+  PolyTree_Node_t* pNewNode = PolyTree_CreateBack(pRoot, n);
+  if(pNewNode == NULL){
+    return NULL;
+  }
+  memcpy(pNewNode->pData, pData, n);
+  return pNewNode;
+}
+
+size_t PolyTree_CopyBackHorizontal(PolyTree_Node_t* pRoot, size_t n, size_t count, ...){
+  PolyTree_Node_t* pCur;
+  void* arg;
+  va_list args;
+
+  if(pRoot == NULL){
+    return count;
+  }
+
+  va_start(args, count);
+
+  while(count--){
+    arg = va_arg(args, void*);
+    pCur = PolyTree_CopyBack(pRoot, n, arg);
+    if(pCur == NULL){
+      return count + 1;
+    }
+  }
+  va_end(args);
+  return count;
+}
+
+size_t PolyTree_CopyBackVertical(PolyTree_Node_t* pRoot, size_t n, size_t count, ...){
+  PolyTree_Node_t* pCur;
+  void* arg;
+  va_list args;
+
+  if(pRoot == NULL){
+    return count;
+  }
+
+  pCur = pRoot;
+  va_start(args, count);
+
+  while(count--){
+    arg = va_arg(args, void*);
+    pCur = PolyTree_CopyBack(pCur, n, arg);
+    if(pCur == NULL){
+      return count + 1;
+    }
+  }
+  va_end(args);
+  return count;
+}
+
+PolyTree_Node_t* PolyTree_CreateBack(PolyTree_Node_t* pRoot, size_t n){
   void* pNewData;
   Node_t * pCreatedNode;
   if(pRoot == NULL){
@@ -83,7 +184,7 @@ void** PolyTree_CreateBack(PolyTree_Node_t* pRoot, size_t n){
     free(pNewData);
     return NULL;
   }
-  return &(pCreatedNode->pData);
+  return pCreatedNode;
 }
 
 void PolyTree_VisitPreOrder(PolyTree_Node_t* pRoot, PolyTree_Visitor_t visitor){
