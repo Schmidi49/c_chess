@@ -23,6 +23,7 @@ typedef void (*DlList_VisitorCB_t)(void*, size_t);
 typedef bool (*DlList_CompareCB_t)(void* pFirst, void* pSecond);
 
 DlList_List_t* DlList_New(void);
+void DlList_Init(DlList_List_t* pList);
 
 DlList_Node_t* DlList_PushBack(DlList_List_t* pList, void* pData);
 

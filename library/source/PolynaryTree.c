@@ -24,15 +24,19 @@ static void freeSubtreeWithoutData(PolyTree_Node_t* pRoot);
 // --------------------
 PolyTree_Node_t* PolyTree_New(void* pData){
   Node_t* pNewRoot = malloc(sizeof(Node_t));
-  if(pNewRoot == NULL){
-    return NULL;
-  }
-  pNewRoot->pData = pData;
-  pNewRoot->pPrev = NULL;
-  pNewRoot->pNext = NULL;
-  pNewRoot->pFirst = NULL;
-  pNewRoot->pLast = NULL;
+  PolyTree_Init(pNewRoot, pData);
   return pNewRoot;
+}
+
+void PolyTree_Init(PolyTree_Node_t* pRoot, void* pData){
+  if(pRoot == NULL){
+    return;
+  }
+  pRoot->pData = pData;
+  pRoot->pPrev = NULL;
+  pRoot->pNext = NULL;
+  pRoot->pFirst = NULL;
+  pRoot->pLast = NULL;
 }
 
 PolyTree_Node_t* PolyTree_PushBack(PolyTree_Node_t* pRoot, void* pData){
@@ -193,7 +197,7 @@ void PolyTree_VisitPreOrder(PolyTree_Node_t* pRoot, PolyTree_VisitorCB_t visitor
 }
 
 void PolyTree_VisitPreOrderDepth(PolyTree_Node_t* pRoot, PolyTree_VisitorCB_t visitor, size_t depth){
-  ode_t* pCur;
+  Node_t* pCur;
   if(pRoot == NULL){
     return;
   }

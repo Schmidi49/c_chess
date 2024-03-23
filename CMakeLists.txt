@@ -5,3 +5,4 @@ project(
   LANGUAGES C)
 
 add_subdirectory(library)
+add_subdirectory(engine)

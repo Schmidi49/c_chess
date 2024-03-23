@@ -20,6 +20,7 @@ typedef void (*PolyTree_VisitorCB_t)(void*, size_t);
 typedef bool (*PolyTree_CompareCB_t)(void* pFirst, void* pSecond);
 
 PolyTree_Node_t* PolyTree_New(void* pData);
+void PolyTree_Init(PolyTree_Node_t* pRoot, void* pData);
 
 PolyTree_Node_t* PolyTree_PushBack(PolyTree_Node_t* pRoot, void* pData);
 size_t PolyTree_PushBackHorizontal(PolyTree_Node_t* pRoot, size_t count, ...);

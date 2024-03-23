@@ -18,7 +18,17 @@ typedef DlList_Node_t Node_t;
 // header function definitions
 // --------------------
 DlList_List_t* DlList_New(void){
-  return malloc(sizeof(List_t));
+  List_t* pNewList = malloc(sizeof(List_t));
+  DlList_Init(pNewList);
+  return pNewList;
+}
+
+void DlList_Init(DlList_List_t* pList){
+  if(pList == NULL){
+    return;
+  }
+  pList->pFirst = NULL;
+  pList->pLast = NULL;
 }
 
 DlList_Node_t* DlList_PushBack(DlList_List_t* pList, void* pData){
