@@ -13,6 +13,7 @@ typedef PolyTree_Node_t Node_t;
 // --------------------
 // forward declarations
 // --------------------
+static bool defaultCompare(void* pFirst, void* pSecond);
 
 static void freeSubtree(PolyTree_Node_t* pRoot);
 
@@ -22,7 +23,7 @@ static void freeSubtreeWithoutData(PolyTree_Node_t* pRoot);
 // header function definitions
 // --------------------
 PolyTree_Node_t* PolyTree_New(void* pData){
-  PolyTree_Node_t* pNewRoot = malloc(sizeof(Node_t));
+  Node_t* pNewRoot = malloc(sizeof(Node_t));
   if(pNewRoot == NULL){
     return NULL;
   }
@@ -67,7 +68,7 @@ PolyTree_Node_t* PolyTree_PushBack(PolyTree_Node_t* pRoot, void* pData){
 }
 
 size_t PolyTree_PushBackHorizontal(PolyTree_Node_t* pRoot, size_t count, ...){
-  PolyTree_Node_t* pCur;
+  Node_t* pCur;
   void* arg;
   va_list args;
 
@@ -89,7 +90,7 @@ size_t PolyTree_PushBackHorizontal(PolyTree_Node_t* pRoot, size_t count, ...){
 }
 
 size_t PolyTree_PushBackVertical(PolyTree_Node_t* pRoot, size_t count, ...){
-  PolyTree_Node_t* pCur;
+  Node_t* pCur;
   void* arg;
   va_list args;
 
@@ -112,7 +113,7 @@ size_t PolyTree_PushBackVertical(PolyTree_Node_t* pRoot, size_t count, ...){
 }
 
 PolyTree_Node_t* PolyTree_CopyBack(PolyTree_Node_t* pRoot, size_t n, void* pData){
-  PolyTree_Node_t* pNewNode = PolyTree_CreateBack(pRoot, n);
+  Node_t* pNewNode = PolyTree_CreateBack(pRoot, n);
   if(pNewNode == NULL){
     return NULL;
   }
@@ -121,7 +122,7 @@ PolyTree_Node_t* PolyTree_CopyBack(PolyTree_Node_t* pRoot, size_t n, void* pData
 }
 
 size_t PolyTree_CopyBackHorizontal(PolyTree_Node_t* pRoot, size_t n, size_t count, ...){
-  PolyTree_Node_t* pCur;
+  Node_t* pCur;
   void* arg;
   va_list args;
 
@@ -143,7 +144,7 @@ size_t PolyTree_CopyBackHorizontal(PolyTree_Node_t* pRoot, size_t n, size_t coun
 }
 
 size_t PolyTree_CopyBackVertical(PolyTree_Node_t* pRoot, size_t n, size_t count, ...){
-  PolyTree_Node_t* pCur;
+  Node_t* pCur;
   void* arg;
   va_list args;
 
@@ -187,12 +188,12 @@ PolyTree_Node_t* PolyTree_CreateBack(PolyTree_Node_t* pRoot, size_t n){
   return pCreatedNode;
 }
 
-void PolyTree_VisitPreOrder(PolyTree_Node_t* pRoot, PolyTree_Visitor_t visitor){
+void PolyTree_VisitPreOrder(PolyTree_Node_t* pRoot, PolyTree_VisitorCB_t visitor){
   PolyTree_VisitPreOrderDepth(pRoot, visitor, 0);
 }
 
-void PolyTree_VisitPreOrderDepth(PolyTree_Node_t* pRoot, PolyTree_Visitor_t visitor, size_t depth){
-  PolyTree_Node_t* pCur;
+void PolyTree_VisitPreOrderDepth(PolyTree_Node_t* pRoot, PolyTree_VisitorCB_t visitor, size_t depth){
+  ode_t* pCur;
   if(pRoot == NULL){
     return;
   }
@@ -203,6 +204,25 @@ void PolyTree_VisitPreOrderDepth(PolyTree_Node_t* pRoot, PolyTree_Visitor_t visi
     PolyTree_VisitPreOrderDepth(pCur, visitor, depth);
     pCur = pCur->pNext;
   }
+}
+
+PolyTree_Node_t* PolyTree_Find(PolyTree_Node_t* pRoot, void* pItem, PolyTree_CompareCB_t comp){
+  Node_t* pCur;
+  if(pRoot == NULL){
+    return NULL;
+  }
+  if(comp == NULL){
+    comp = defaultCompare;
+  }
+
+  pCur = pRoot->pFirst;
+  while(pCur != NULL){
+    if(comp(pItem, pCur->pData)){
+      return pCur;
+    }
+    pCur = pCur->pNext;
+  }
+  return NULL;
 }
 
 void PolyTree_Free(PolyTree_Node_t* pRoot){
@@ -227,9 +247,12 @@ void PolyTree_FreeWithoutData(PolyTree_Node_t* pRoot){
 // --------------------
 // internal function definitions
 // --------------------
+static bool defaultCompare(void* pFirst, void* pSecond){
+  return pFirst == pSecond;
+}
 
 static void freeSubtree(PolyTree_Node_t* pRoot){
-  PolyTree_Node_t* pCur;
+  Node_t* pCur;
   if(pRoot == NULL){
     return;
   }
@@ -252,7 +275,7 @@ static void freeSubtree(PolyTree_Node_t* pRoot){
 }
 
 static void freeSubtreeWithoutData(PolyTree_Node_t* pRoot){
-  PolyTree_Node_t* pCur;
+  Node_t* pCur;
   if(pRoot == NULL){
     return;
   }
