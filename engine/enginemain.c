@@ -1,6 +1,7 @@
 /******************************************************************************
  * @file main.c
  * @author Erik Schmidthaler
+ * @brief testing main for the engine library
  *
  * (C) Erik Schmidthaler (25.11.2023)
  */
@@ -10,7 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int main(int const argc, char const* const* const argv){
+int main(){
   printf("chess is cool\n");
   Board_t board;
   Board_Init(&board);
