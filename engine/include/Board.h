@@ -5,14 +5,21 @@
 #ifndef C_CHESS_BOARD_H
 #define C_CHESS_BOARD_H
 
-#include "Piece.h"
-#include "DoubleLinkedList.h"
+#include "Game.h"
 
-typedef struct Board_s{
-  struct Piece_s* squares[BOARD_COLS][BOARD_ROWS];
-  DlList_List_t activePieceList;
-} Board_t;
+#include <stdbool.h>
+#include <stdint.h>
 
-void Board_Init(Board_t* pBoard);
+#define AT(array, location) (*(*array + location))
+
+//forward typedef
+typedef struct tGame tGame;
+
+typedef struct tBoard{
+  char squares_kind[BOARD_COLS][BOARD_ROWS];
+  tPieceID squares_id[BOARD_COLS][BOARD_ROWS];
+  tGame* pGame;
+  bool whiteToMove;
+}tBoard;
 
 #endif //C_CHESS_BOARD_H

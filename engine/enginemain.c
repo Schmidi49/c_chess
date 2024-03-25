@@ -6,24 +6,14 @@
  * (C) Erik Schmidthaler (25.11.2023)
  */
 
-#include "Board.h"
+#include "include/Game.h"
 
 #include <stdio.h>
-#include <string.h>
 
 int main(){
   printf("chess is cool\n");
-  Board_t board;
-  Board_Init(&board);
+  tBoard board;
 
-  Piece_NewRook(&board, 1, true);
-  Piece_NewRook(&board, 11, true);
-  if(board.squares[1][3] != NULL){
-    printf("placed a rook succesfully\n");
-  }
-  if(board.squares[4][1] == NULL){
-    printf("square is empty\n");
-  }
 
   return 0;
 }

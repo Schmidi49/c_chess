@@ -5,30 +5,29 @@
 #ifndef C_CHESS_PIECE_H
 #define C_CHESS_PIECE_H
 
-#define AT(pBoard, offset) *(*(pBoard->squares) + offset)
-
-#include "Board.h"
-#include "Piece.h"
+#include "Game.h"
 
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef struct Piece_s{
+const char cNoPiece   = ' ';
+const char cWhiteKing = 'K';
+const char cWhiteRook = 'R';
+const char cBlackKing = 'k';
+const char cBlackRook = 'r';
+
+//forward typedef
+typedef struct tBoard tBoard;
+
+typedef struct tPieceMethodes{
+  int32_t (*getValue)(tBoard* pBoard, tLocation loc);
+}tPieceMethodes;
+
+typedef struct tPiece{
   char kind;
-  bool isWhite;
-  bool active;
+  tPieceMethodes const* pMethodes;
+}tPiece;
 
-  int8_t onBoardOffset;
-
-  struct PieceMethodes_s* pMethods;
-  struct Board_s* pBoard;
-} Piece_t;
-
-typedef struct PieceMethodes_s{
-  int32_t (*getValue)(struct Piece_s* pSelf);
-} PieceMethodes_t;
-
-Piece_t* Piece_NewRook(struct Board_s* pBoard, int8_t offset, bool isWhite);
-
+bool Piece_isWhite(tBoard* pBoard, tLocation loc);
 
 #endif //C_CHESS_PIECE_H

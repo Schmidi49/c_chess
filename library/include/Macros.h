@@ -9,6 +9,8 @@
 #ifndef C_CHESS_MACROS_H
 #define C_CHESS_MACROS_H
 
+#include <stddef.h>
+
 #define IF_NULL_RETURN(p) if(p == NULL){return;}
 #define IF_NULL_RETURN_NULL(p) if(p == NULL){return NULL;}
 #define IF_NULL_RETURN_VAL(p, val) if(p == NULL){return val;}

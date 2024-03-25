@@ -4,7 +4,7 @@
 
 #include "Rook.h"
 
-PieceMethodes_t Rook_MethodeTable = {
+const tPieceMethodes Rook_MethodeTable = {
   .getValue = Rook_getValue,
 };
 
@@ -16,8 +16,8 @@ PieceMethodes_t Rook_MethodeTable = {
 // --------------------
 // header function definitions
 // --------------------
-int32_t Rook_getValue(struct Piece_s* pSelf){
-  return pSelf->isWhite ? 500 : -500;
+int32_t Rook_getValue(tBoard* pBoard, tLocation loc){
+  return Piece_isWhite(pBoard, loc) ? 500 : -500;
 }
 
 // --------------------

@@ -5,12 +5,12 @@
 #ifndef C_CHESS_ROOK_H
 #define C_CHESS_ROOK_H
 
-#include "Piece.h"
+#include "Game.h"
 
 #include <stdint.h>
 
-int32_t Rook_getValue(struct Piece_s* pSelf);
+int32_t Rook_getValue(tBoard* pBoard, tLocation loc);
 
-extern PieceMethodes_t Rook_MethodeTable;
+extern const tPieceMethodes Rook_MethodeTable;
 
 #endif //C_CHESS_ROOK_H
