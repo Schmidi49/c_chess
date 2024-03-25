@@ -17,6 +17,18 @@ bool Piece_isWhite(tBoard* pBoard, tLocation loc){
   return pieceKind < 'a';
 }
 
+bool Piece_SameColor(tBoard* pBoard, tLocation first, tLocation second){
+  const char pieceKind1 = AT(pBoard->squares_kind, first);
+  const char pieceKind2 = AT(pBoard->squares_kind, second);
+  return !((pieceKind1 < 'a') ^ (pieceKind2 < 'a'));
+}
+
+bool Piece_DifferentColor(tBoard* pBoard, tLocation first, tLocation second){
+  const char pieceKind1 = AT(pBoard->squares_kind, first);
+  const char pieceKind2 = AT(pBoard->squares_kind, second);
+  return (pieceKind1 < 'a') ^ (pieceKind2 < 'a');
+}
+
 // --------------------
 // internal function definitions
 // --------------------

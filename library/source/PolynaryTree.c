@@ -178,11 +178,11 @@ tNode* PolyTree_CreateBack(tNode* pRoot, size_t n){
   return pCreatedNode;
 }
 
-void PolyTree_VisitPreOrder(tNode* pRoot, PolyTree_VisitorCB_t visitor){
+void PolyTree_VisitPreOrder(tNode* pRoot, PolyTree_VisitorCB visitor){
   PolyTree_VisitPreOrderDepth(pRoot, visitor, 0);
 }
 
-void PolyTree_VisitPreOrderDepth(tNode* pRoot, PolyTree_VisitorCB_t visitor, size_t depth){
+void PolyTree_VisitPreOrderDepth(tNode* pRoot, PolyTree_VisitorCB visitor, size_t depth){
   tNode* pCur;
   IF_NULL_RETURN(pRoot)
 
@@ -196,7 +196,7 @@ void PolyTree_VisitPreOrderDepth(tNode* pRoot, PolyTree_VisitorCB_t visitor, siz
   }
 }
 
-tNode* PolyTree_Find(tNode* pRoot, void* pItem, PolyTree_CompareCB_t comp){
+tNode* PolyTree_Find(tNode* pRoot, void* pItem, PolyTree_CompareCB comp){
   tNode* pCur;
   IF_NULL_RETURN_NULL(pRoot)
   // use the default comparator when no is given

@@ -9,7 +9,9 @@
 
 #include <stdint.h>
 
-int32_t Rook_getValue(tBoard* pBoard, tLocation loc);
+int32_t Rook_GetValue(tBoard* pBoard, tLocation loc);
+
+void Rook_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, void* pBase);
 
 extern const tPieceMethodes Rook_MethodeTable;
 

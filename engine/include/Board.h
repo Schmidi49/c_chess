@@ -10,7 +10,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define AT(array, location) (*(*array + location))
+#define AT(squares, location) (*(*(squares) + *(uint8_t*)(&(location))))
 
 //forward typedef
 typedef struct tGame tGame;

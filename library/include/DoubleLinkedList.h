@@ -19,8 +19,8 @@ typedef struct tDlList_Node {
   struct tDlList_Node* pNext;
 } tDlList_Node;
 
-typedef void (*DlList_VisitorCB_t)(void*, size_t);
-typedef bool (*DlList_CompareCB_t)(void* pFirst, void* pSecond);
+typedef void (*DlList_VisitorCB)(void*, size_t);
+typedef bool (*DlList_CompareCB)(void* pFirst, void* pSecond);
 
 tDlList_List* DlList_New(void);
 void DlList_Init(tDlList_List* pList);

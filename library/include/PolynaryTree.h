@@ -27,11 +27,11 @@ typedef struct tPolyTree_Node {
 /// @brief callback function when visiting a tree
 /// @param pData data which gets visited
 /// @param depth depth inside the tree of the currently visited node
-typedef void (*PolyTree_VisitorCB_t)(void* pData, size_t depth);
+typedef void (*PolyTree_VisitorCB)(void* pData, size_t depth);
 /// @brief comparator callback for finding, removing and extracting functions
 /// @param pFirst first parameter to be compared
 /// @param pSecond first parameter to be compared
-typedef bool (*PolyTree_CompareCB_t)(void* pFirst, void* pSecond);
+typedef bool (*PolyTree_CompareCB)(void* pFirst, void* pSecond);
 
 /// @brief allocates a new tree root
 /// @param pData data to be attached to the root
@@ -92,12 +92,12 @@ tPolyTree_Node* PolyTree_CreateBack(tPolyTree_Node* pRoot, size_t n);
 /// @brief visits all nodes of tree, always root before the leafs
 /// @param pRoot root pointer
 /// @param visitor visitor callback which gets called with each nodes data and depth
-void PolyTree_VisitPreOrder(tPolyTree_Node* pRoot, PolyTree_VisitorCB_t visitor);
+void PolyTree_VisitPreOrder(tPolyTree_Node* pRoot, PolyTree_VisitorCB visitor);
 /// @brief visits all nodes of tree, always root before the leafs. starts with a not default depth
 /// @param pRoot root pointer
 /// @param visitor visitor callback which gets called with each nodes data and depth
 /// @param depth starting depth
-void PolyTree_VisitPreOrderDepth(tPolyTree_Node* pRoot, PolyTree_VisitorCB_t visitor, size_t depth);
+void PolyTree_VisitPreOrderDepth(tPolyTree_Node* pRoot, PolyTree_VisitorCB visitor, size_t depth);
 
 /// @brief finds the first node only in the leafs of the root node (does not search recursively)
 /// @note if no compare function is passed, the default compare is by the pointers addresses themself
@@ -105,7 +105,7 @@ void PolyTree_VisitPreOrderDepth(tPolyTree_Node* pRoot, PolyTree_VisitorCB_t vis
 /// @param pItem data with which to compare
 /// @param comp custom comparator callback
 /// @return first found node pointer, NULL if nothing was found
-tPolyTree_Node* PolyTree_FindLaterally(tPolyTree_Node* pRoot, void* pItem, PolyTree_CompareCB_t comp);
+tPolyTree_Node* PolyTree_FindLaterally(tPolyTree_Node* pRoot, void* pItem, PolyTree_CompareCB comp);
 
 //functions to be implemented soon
 //void PolyTree_Remove(tPolyTree_Node* pRoot, void* pItem, PolyTree_CompareCB_t comp);
