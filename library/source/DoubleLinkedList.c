@@ -7,8 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef DlList_List_t List_t;
-typedef DlList_Node_t Node_t;
+typedef tDlList_List tList;
+typedef tDlList_Node tNode;
 
 // --------------------
 // forward declarations
@@ -17,13 +17,13 @@ typedef DlList_Node_t Node_t;
 // --------------------
 // header function definitions
 // --------------------
-DlList_List_t* DlList_New(void){
-  List_t* pNewList = malloc(sizeof(List_t));
+tList* DlList_New(void){
+  tList* pNewList = malloc(sizeof(tList));
   DlList_Init(pNewList);
   return pNewList;
 }
 
-void DlList_Init(DlList_List_t* pList){
+void DlList_Init(tList* pList){
   if(pList == NULL){
     return;
   }
@@ -31,13 +31,13 @@ void DlList_Init(DlList_List_t* pList){
   pList->pLast = NULL;
 }
 
-DlList_Node_t* DlList_PushBack(DlList_List_t* pList, void* pData){
-  Node_t* pNewNode;
+tNode* DlList_PushBack(tList* pList, void* pData){
+  tNode* pNewNode;
   if(pList == NULL){
     return NULL;
   }
 
-  pNewNode = malloc(sizeof(Node_t));
+  pNewNode = malloc(sizeof(tNode));
   if(pNewNode == NULL){
     return NULL;
   }
@@ -56,13 +56,13 @@ DlList_Node_t* DlList_PushBack(DlList_List_t* pList, void* pData){
   return pNewNode;
 }
 
-DlList_Node_t* DlList_PushFront(DlList_List_t* pList, void* pData){
-  Node_t* pNewNode;
+tNode* DlList_PushFront(tList* pList, void* pData){
+  tNode* pNewNode;
   if(pList == NULL){
     return NULL;
   }
 
-  pNewNode = malloc(sizeof(Node_t));
+  pNewNode = malloc(sizeof(tNode));
   if(pNewNode == NULL){
     return NULL;
   }
@@ -81,8 +81,8 @@ DlList_Node_t* DlList_PushFront(DlList_List_t* pList, void* pData){
   return pNewNode;
 }
 
-DlList_Node_t* DlList_CopyBack(DlList_List_t* pList, size_t n, void* pData){
-  Node_t* pNewNode = DlList_CreateBack(pList, n);
+tNode* DlList_CopyBack(tList* pList, size_t n, void* pData){
+  tNode* pNewNode = DlList_CreateBack(pList, n);
   if(pNewNode == NULL){
     return NULL;
   }
@@ -90,8 +90,8 @@ DlList_Node_t* DlList_CopyBack(DlList_List_t* pList, size_t n, void* pData){
   return pNewNode;
 }
 
-DlList_Node_t* DlList_CopyFront(DlList_List_t* pList, size_t n, void* pData){
-  Node_t* pNewNode = DlList_CreateFront(pList, n);
+tNode* DlList_CopyFront(tList* pList, size_t n, void* pData){
+  tNode* pNewNode = DlList_CreateFront(pList, n);
   if(pNewNode == NULL){
     return NULL;
   }
@@ -99,9 +99,9 @@ DlList_Node_t* DlList_CopyFront(DlList_List_t* pList, size_t n, void* pData){
   return pNewNode;
 }
 
-DlList_Node_t* DlList_CreateBack(DlList_List_t* pList, size_t n){
+tNode* DlList_CreateBack(tList* pList, size_t n){
   void* pNewData;
-  Node_t * pCreatedNode;
+  tNode * pCreatedNode;
   if(pList == NULL){
     return NULL;
   }
@@ -121,9 +121,9 @@ DlList_Node_t* DlList_CreateBack(DlList_List_t* pList, size_t n){
   return pCreatedNode;
 }
 
-DlList_Node_t* DlList_CreateFront(DlList_List_t* pList, size_t n){
+tNode* DlList_CreateFront(tList* pList, size_t n){
   void* pNewData;
-  Node_t * pCreatedNode;
+  tNode * pCreatedNode;
   if(pList == NULL){
     return NULL;
   }
@@ -143,8 +143,8 @@ DlList_Node_t* DlList_CreateFront(DlList_List_t* pList, size_t n){
   return pCreatedNode;
 }
 
-void DlList_Free(DlList_List_t* pList){
-  Node_t* pCur;
+void DlList_Free(tList* pList){
+  tNode* pCur;
   if(pList == NULL){
     return;
   }
@@ -165,8 +165,8 @@ void DlList_Free(DlList_List_t* pList){
   free(pList);
 }
 
-void DlList_FreeWithoutData(DlList_List_t* pList){
-  Node_t* pCur;
+void DlList_FreeWithoutData(tList* pList){
+  tNode* pCur;
   if(pList == NULL){
     return;
   }

@@ -8,37 +8,37 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-typedef struct DlList_List_s {
-  struct DlList_Node_s* pFirst;
-  struct DlList_Node_s* pLast;
-} DlList_List_t;
+typedef struct tDlList_List {
+  struct tDlList_Node* pFirst;
+  struct tDlList_Node* pLast;
+} tDlList_List;
 
-typedef struct DlList_Node_s {
+typedef struct tDlList_Node {
   void* pData;
-  struct DlList_Node_s* pPrev;
-  struct DlList_Node_s* pNext;
-} DlList_Node_t;
+  struct tDlList_Node* pPrev;
+  struct tDlList_Node* pNext;
+} tDlList_Node;
 
 typedef void (*DlList_VisitorCB_t)(void*, size_t);
 typedef bool (*DlList_CompareCB_t)(void* pFirst, void* pSecond);
 
-DlList_List_t* DlList_New(void);
-void DlList_Init(DlList_List_t* pList);
+tDlList_List* DlList_New(void);
+void DlList_Init(tDlList_List* pList);
 
-DlList_Node_t* DlList_PushBack(DlList_List_t* pList, void* pData);
+tDlList_Node* DlList_PushBack(tDlList_List* pList, void* pData);
 
-DlList_Node_t* DlList_PushFront(DlList_List_t* pList, void* pData);
+tDlList_Node* DlList_PushFront(tDlList_List* pList, void* pData);
 
-DlList_Node_t* DlList_CopyBack(DlList_List_t* pList, size_t n, void* pData);
+tDlList_Node* DlList_CopyBack(tDlList_List* pList, size_t n, void* pData);
 
-DlList_Node_t* DlList_CopyFront(DlList_List_t* pList, size_t n, void* pData);
+tDlList_Node* DlList_CopyFront(tDlList_List* pList, size_t n, void* pData);
 
-DlList_Node_t* DlList_CreateBack(DlList_List_t* pList, size_t n);
+tDlList_Node* DlList_CreateBack(tDlList_List* pList, size_t n);
 
-DlList_Node_t* DlList_CreateFront(DlList_List_t* pList, size_t n);
+tDlList_Node* DlList_CreateFront(tDlList_List* pList, size_t n);
 
-void DlList_Free(DlList_List_t* pList);
+void DlList_Free(tDlList_List* pList);
 
-void DlList_FreeWithoutData(DlList_List_t* pList);
+void DlList_FreeWithoutData(tDlList_List* pList);
 
 #endif //C_CHESS_DOUBLELINKEDLIST_H
