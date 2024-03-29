@@ -28,6 +28,7 @@ typedef struct tLocation{
 #include "Board.h"
 #include "Piece.h"
 #include "Move.h"
+#include "Evaluation.h"
 
 //forward typedef
 typedef struct tBoard tBoard;
