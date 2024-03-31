@@ -13,8 +13,8 @@
 #include <stdlib.h>
 
 void visitor(void* null, tMove* move){
-  char* begin = Game_LocationToStr(move->begin);
-  char* end = Game_LocationToStr(move->end);
+  char* begin = Board_LocationToStr(move->begin);
+  char* end = Board_LocationToStr(move->end);
 
   printf("Got move from %s to %s\n", begin, end);
 
@@ -28,7 +28,7 @@ int main(){
   Game_Init(&game);
   DlList_Init(&list);
 
-  tLocation loc = Game_CoordsToLocation(5,2);
+  tLocation loc = Board_CoordsToLocation(5, 2);
   int i = *(uint8_t *)(&(loc));
   char *p = *(game.currentBoard.squares_kind) + i;
   char c = (*(p));

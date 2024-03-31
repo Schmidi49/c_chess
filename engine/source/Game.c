@@ -8,7 +8,6 @@
 #include "Rook.h"
 
 #include <string.h>
-#include <stdlib.h>
 
 // --------------------
 // forward declarations
@@ -29,7 +28,6 @@ void Game_Init(tGame* pGame){
 
   setupPieces(pGame);
   pGame->currentBoard.whiteToMove = true;
-  pGame->currentBoard.pGame = pGame;
 
   DlList_Init(&pGame->moveList);
 }
@@ -39,24 +37,6 @@ tPieceMethodes const* Game_GetMethodes(tPieceType kind){
     return &Rook_MethodeTable;
   else
     return NULL;
-}
-
-tLocation Game_CoordsToLocation(uint8_t col, uint8_t row){
-  tLocation loc;
-  loc.col = col;
-  loc.row = row;
-  return loc;
-}
-
-char* Game_LocationToStr(tLocation loc){
-  char* pChar = malloc(3);
-  IF_NULL_RETURN_NULL(pChar);
-
-  pChar[0] = 'a' + (char)(loc.col);
-  pChar[1] = '1' + (char)(loc.row);
-  pChar[2] = '\0';
-
-  return pChar;
 }
 
 // --------------------

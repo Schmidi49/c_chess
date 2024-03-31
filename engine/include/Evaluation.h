@@ -5,8 +5,8 @@
 #ifndef C_CHESS_EVALUATION_H
 #define C_CHESS_EVALUATION_H
 
-#define NO_WIN_BIT (1 << ((sizeof(int) * 8) - 1))
-#define NO_WIN(pEval) (NO_WIN_BIT & pFirst->mateIn)
+#define EVAL_NO_WIN_CODE (1 << ((sizeof(int) * 8) - 1))
+#define NO_WIN(pEval) (EVAL_NO_WIN_CODE == pFirst->mateIn)
 #define EVAL_UINT(i) (*(unsigned int*)(&(i)))
 
 typedef struct tEvaluation{

@@ -31,7 +31,12 @@ bool Evaluation_ST(tEvaluation* pFirst, tEvaluation* pSecond){
 }
 
 bool Evaluation_EQ(tEvaluation* pFirst, tEvaluation* pSecond){
-  return (pFirst->mateIn == pSecond->mateIn) == (pFirst->eval == pSecond->eval);
+  if(NO_WIN(pFirst) && NO_WIN(pSecond)){
+    return (pFirst->eval == pSecond->eval);
+  }
+  else{
+    return (pFirst->mateIn == pSecond->mateIn);
+  }
 }
 
 int Evaluation_Comp(tEvaluation* pFirst, tEvaluation* pSecond){

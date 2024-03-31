@@ -58,7 +58,7 @@ void Rook_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
 // internal function definitions
 // --------------------
 bool finishMove(int col, int row, tBoard* pBoard, tMove* pMove, Piece_GenerateCB genCB, void* pBase){
-  pMove->end = Game_CoordsToLocation(col, row);
+  pMove->end = Board_CoordsToLocation(col, row);
   pMove->takenPiece = AT(pBoard->squares_kind, pMove->end);
   if(pMove->takenPiece == cNoPiece){
     pMove->type = piece_move;

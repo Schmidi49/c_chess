@@ -16,7 +16,8 @@ target_sources(Engine
   PRIVATE source/Board.c
   PRIVATE source/Move.c
   PRIVATE source/Piece.c
-  PRIVATE source/Evaluation.c)
+  PRIVATE source/Evaluation.c
+  PRIVATE source/Position.c)
 
 add_executable(enginemain enginemain.c)
 target_link_libraries(enginemain Engine)

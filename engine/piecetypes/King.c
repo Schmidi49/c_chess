@@ -54,7 +54,7 @@ void King_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
     }
     // legal move check (field attacked)
 
-    move.end = Game_CoordsToLocation(c, r);
+    move.end = Board_CoordsToLocation(c, r);
     move.takenPiece = AT(pBoard->squares_kind, move.end);
     if(move.takenPiece == cNoPiece){
       move.type = piece_move;
