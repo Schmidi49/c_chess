@@ -12,10 +12,10 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-/// @brief strcuture for a Polynary Tree, contains the Linked List and the Tree structures in it.
+/// @brief structure for a Polynary Tree, contains the Linked List and the Tree structures in it.
 /// Represents root and leaf alike
 /// @note pPrev and pNext shall only be used from the Node in the next higher layer, they are only thought to iterate
-/// threw the many brnaches of a root node
+/// threw the many branches of a root node
 typedef struct tPolyTree_Node {
   void* pData;                    /// @brief data pointer
   struct tPolyTree_Node* pFirst; /// @brief pointer to the first leaf
