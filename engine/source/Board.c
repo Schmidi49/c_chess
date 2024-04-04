@@ -15,6 +15,31 @@
 // --------------------
 // header function definitions
 // --------------------
+bool Board_SquareUnderAttack(tBoard* pBoard, tLocation loc){
+  
+}
+
+bool Board_SquareDefended(tBoard* pBoard, tLocation loc){
+
+}
+
+bool Board_IsCheck(tBoard* pBoard){
+  if(pBoard->whiteToMove){
+    return Board_SquareUnderAttack(pBoard, pBoard->whiteKing);
+  }
+  else{
+    return Board_SquareUnderAttack(pBoard, pBoard->blackKing);
+  }
+}
+
+bool Board_KingCaptureable(tBoard* pBoard){
+  if(pBoard->whiteToMove){
+    return Board_SquareUnderAttack(pBoard, pBoard->blackKing);
+  }
+  else{
+    return Board_SquareUnderAttack(pBoard, pBoard->whiteKing);
+  }
+}
 
 tLocation Board_CoordsToLocation(uint8_t col, uint8_t row){
   tLocation loc;
