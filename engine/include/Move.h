@@ -10,10 +10,12 @@ typedef enum eMovetype{
   piece_move = 1,
   pawn_move = 2,
   pawn_move_double = 3,
-  capture = 4,
-  en_passant = 5,
-  castle_short = 6,
-  castle_long = 7,
+  pawn_move_promotion = 4,
+  capture = 5,
+  pawn_capture_promotion = 6,
+  en_passant = 7,
+  castle_short = 8,
+  castle_long = 9,
 } eMovetype;
 
 typedef struct tMove{
@@ -24,10 +26,7 @@ typedef struct tMove{
   tPieceType takenPiece;
 
   //TODO check if flags are necessary (promotion prob. is
-  bool check;
-  bool mate;
-  bool stalemate;
-  bool promotion;
+  bool promotion_rook;
 } tMove;
 
 #endif //C_CHESS_MOVE_H

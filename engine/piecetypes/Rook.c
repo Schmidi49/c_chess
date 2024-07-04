@@ -27,9 +27,7 @@ void Rook_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
   tMove move = {
     .begin = loc,
     .movingPiece = AT(pBoard->squares_kind, loc),
-    .check = false,
-    .mate = false,
-    .promotion = false};
+    .promotion_rook = false};
   //upwards
   c = loc.col;
   for(r = loc.row + 1; r < BOARD_ROWS; r++){

@@ -39,9 +39,7 @@ void King_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
   tMove move = {
     .begin = loc,
     .movingPiece = AT(pBoard->squares_kind, loc),
-    .check = false,
-    .mate = false,
-    .promotion = false};
+    .promotion_rook = false};
 
   for(i = 0; i < 8; i++){
     r = King_MovePattern[i].row + loc.row;

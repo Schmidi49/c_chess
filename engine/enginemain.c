@@ -8,6 +8,7 @@
 
 #include "include/Game.h"
 #include "DoubleLinkedList.h"
+#include "PolynaryTree.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +18,18 @@ void visitor(void* null, tMove* move){
   char* end = Board_LocationToStr(move->end);
 
   printf("Got move from %s to %s\n", begin, end);
+
+  free(begin);
+  free(end);
+}
+
+void treeInserter(void* pTree, tMove* move){
+  PolyTree_CopyBack(pTree, sizeof(tMove), move);
+
+  char* begin = Board_LocationToStr(move->begin);
+  char* end = Board_LocationToStr(move->end);
+
+  printf("Inserted move from %s to %s into the tree\n", begin, end);
 
   free(begin);
   free(end);
@@ -34,6 +47,8 @@ int main(){
   char c = (*(p));
   tPieceMethodes const* m = Game_GetMethodes(AT(game.currentBoard.squares_kind, loc));
   m->generateMoves(&game.currentBoard, loc, visitor, NULL);
+  tPolyTree_Node* pTree = PolyTree_New(NULL);
+  m->generateMoves(&game.currentBoard, loc, treeInserter, pTree);
 
   return 0;
 }

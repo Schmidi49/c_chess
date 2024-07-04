@@ -162,7 +162,7 @@ size_t PolyTree_CopyBackVertical(tNode* pRoot, size_t n, size_t count, ...){
 
 tNode* PolyTree_CreateBack(tNode* pRoot, size_t n){
   void* pNewData;
-  tNode * pCreatedNode;
+  tNode* pCreatedNode;
   IF_NULL_RETURN_NULL(pRoot)
 
   //allocate memory
