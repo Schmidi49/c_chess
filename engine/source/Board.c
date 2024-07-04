@@ -10,17 +10,17 @@
 // --------------------
 // forward declarations
 // --------------------
-
+bool SquareAttackedBy(tBoard* pBoard, tLocation loc, bool whiteAttacks);
 
 // --------------------
 // header function definitions
 // --------------------
 bool Board_SquareUnderAttack(tBoard* pBoard, tLocation loc){
-  
+  return SquareAttackedBy(pBoard, loc, pBoard->whiteToMove);
 }
 
 bool Board_SquareDefended(tBoard* pBoard, tLocation loc){
-
+  return SquareAttackedBy(pBoard, loc, !pBoard->whiteToMove);
 }
 
 bool Board_IsCheck(tBoard* pBoard){
@@ -62,3 +62,144 @@ char* Board_LocationToStr(tLocation loc){
 // --------------------
 // internal function definitions
 // --------------------
+bool SquareAttackedBy(tBoard* pBoard, tLocation loc, bool whiteAttacks){
+  int i;
+
+  // up
+  i = 1;
+  while (loc.row + i < BOARD_ROWS){
+    tLocation newLoc = {loc.row + i, loc.col};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskRook | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // down
+  i = 1;
+  while (loc.row + i >= 0){
+    tLocation newLoc = {loc.row - i, loc.col};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskRook | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // right
+  i = 1;
+  while (loc.col + i < BOARD_COLS){
+    tLocation newLoc = {loc.row, loc.col + i};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskRook | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // left
+  i = 1;
+  while (loc.col - i >= 0){
+    tLocation newLoc = {loc.row, loc.col - i};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskRook | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // up right
+  i = 1;
+  while (loc.row + i < BOARD_ROWS && loc.col + i < BOARD_COLS){
+    tLocation newLoc = {loc.row + i, loc.col + i};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskBishop | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // up left
+  i = 1;
+  while (loc.row + i < BOARD_ROWS && loc.col - i >= 0){
+    tLocation newLoc = {loc.row + i, loc.col - i};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskBishop | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // down right
+  i = 1;
+  while (loc.row - i >= 0 && loc.col + i < BOARD_COLS){
+    tLocation newLoc = {loc.row - i, loc.col + i};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskBishop | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  // down left
+  i = 1;
+  while (loc.row - i >= 0 && loc.col - i >= 0){
+    tLocation newLoc = {loc.row - i, loc.col - i};
+    if(AT(pBoard->squares_kind, newLoc) != cNoPiece){
+      if((Piece_isWhite(pBoard, newLoc) == whiteAttacks)){
+        if(i == 1){
+          if(Piece_isKind(pBoard, newLoc, cMaskKing))
+            return true;
+        }
+        if(Piece_isKind(pBoard, newLoc, cMaskBishop | cMaskQueen))
+          return true;
+      }
+    }
+    i++;
+  }
+
+  return false;
+}
