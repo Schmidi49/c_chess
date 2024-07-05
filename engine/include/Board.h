@@ -32,11 +32,15 @@ bool Board_IsCheck(tBoard* pBoard);
 
 bool Board_KingCaptureable(tBoard* pBoard);
 
-tLocation Board_CoordsToLocation(uint8_t col, uint8_t row);
+tLocation Board_CoordsToLocation(const uint8_t col, const uint8_t row);
+
+tLocation Board_StrToLocation(const char* field);
 
 char* Board_LocationToStr(tLocation loc);
 
 // no validation for the move
 void Board_Advance(tBoard* pBoard, tMove* pMove);
+
+void Board_GenerateMoves(tBoard* pBoard, Piece_GenerateCB genCB, void* pBase);
 
 #endif //C_CHESS_BOARD_H

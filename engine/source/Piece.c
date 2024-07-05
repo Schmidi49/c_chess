@@ -4,6 +4,9 @@
 
 #include "Game.h"
 
+#include "Rook.h"
+#include "King.h"
+
 // --------------------
 // forward declarations
 // --------------------
@@ -30,19 +33,28 @@ bool Piece_DifferentColor(tBoard* pBoard, tLocation first, tLocation second){
 }
 
 bool Piece_isKind(tBoard* pBoard, tLocation loc, uint8_t kindmask){
-  if(kindmask | cMaskNoPiece){
+  if(kindmask & cMaskNoPiece){
     if(AT(pBoard->squares_kind, loc) == cNoPiece)
       return true;
   }
-  if(kindmask | cMaskKing){
+  if(kindmask & cMaskKing){
     if(AT(pBoard->squares_kind, loc) == cWhiteKing || AT(pBoard->squares_kind, loc) == cBlackKing)
       return true;
   }
-  if(kindmask | cMaskRook){
+  if(kindmask & cMaskRook){
     if(AT(pBoard->squares_kind, loc) == cWhiteRook || AT(pBoard->squares_kind, loc) == cBlackRook)
       return true;
   }
   return false;
+}
+
+tPieceMethodes const* Piece_GetMethodes(tBoard* pBoard, tLocation loc){
+  if(Piece_isKind(pBoard, loc, cMaskRook))
+    return &Rook_MethodeTable;
+  else if(Piece_isKind(pBoard, loc, cMaskKing))
+    return &King_MethodeTable;
+  else
+    return NULL;
 }
 
 // --------------------

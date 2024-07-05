@@ -6,7 +6,8 @@
 
 const tPieceMethodes Rook_MethodeTable = {
   .getValue = Rook_GetValue,
-  .generateMoves = Rook_GenerateMoves
+  .generateMoves = Rook_GenerateMoves,
+  .kindMask = cMaskRook
 };
 
 // --------------------

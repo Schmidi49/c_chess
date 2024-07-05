@@ -5,14 +5,23 @@
 #include "Game.h"
 #include "Macros.h"
 
-#include "Rook.h"
-
 #include <string.h>
 
 // --------------------
 // forward declarations
 // --------------------
 static void setupPieces(tGame* pGame);
+
+struct pieces{
+  char field[2];
+  char kind;
+} const pieceLocations[] = {  {.field = "f3", .kind = 'R'},
+                              {.field = "e4", .kind = 'K'},
+                              {.field = "h8", .kind = 'k'}};
+
+const size_t cPieceNumber = (sizeof pieceLocations) / (sizeof(struct pieces));
+
+
 
 // --------------------
 // header function definitions
@@ -32,24 +41,19 @@ void Game_Init(tGame* pGame){
   DlList_Init(&pGame->moveList);
 }
 
-tPieceMethodes const* Game_GetMethodes(tPieceType kind){
-  if(kind == cWhiteRook || kind == cBlackRook)
-    return &Rook_MethodeTable;
-  else
-    return NULL;
-}
-
 // --------------------
 // internal function definitions
 // --------------------
 static void setupPieces(tGame* pGame){
-  tPieceID count = 0;
+  for(tPieceID count = 0; count < cPieceNumber; count++){
+    tLocation loc = Board_StrToLocation(pieceLocations[count].field);
+    pGame->currentBoard.squares_kind[loc.col][loc.row] = pieceLocations[count].kind;
+    pGame->currentBoard.squares_id[loc.col][loc.row] = count;
 
-  pGame->currentBoard.squares_kind[5][2] = cWhiteRook;
-  pGame->currentBoard.squares_id[5][2] = count;
-  count++;
+    if(pieceLocations[count].kind == 'K')
+      pGame->currentBoard.whiteKing = loc;
+    else if(pieceLocations[count].kind == 'k')
+      pGame->currentBoard.blackKing = loc;
 
-//  pGame->currentBoard.squares_kind[0][7] = cBlackRook;
-//  pGame->currentBoard.squares_id[0][7] = count;
-//  count++;
+  }
 }

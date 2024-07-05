@@ -41,10 +41,17 @@ bool Board_KingCaptureable(tBoard* pBoard){
   }
 }
 
-tLocation Board_CoordsToLocation(uint8_t col, uint8_t row){
+tLocation Board_CoordsToLocation(const uint8_t col, const uint8_t row){
   tLocation loc;
   loc.col = col;
   loc.row = row;
+  return loc;
+}
+
+tLocation Board_StrToLocation(const char* field){
+  tLocation loc;
+  loc.col = *(field+0) - 'a';
+  loc.row = *(field+1) - '1';
   return loc;
 }
 
@@ -71,6 +78,21 @@ void Board_Advance(tBoard* pBoard, tMove* pMove){
   }
 
   pBoard->whiteToMove = !pBoard->whiteToMove;
+}
+
+void Board_GenerateMoves(tBoard* pBoard, Piece_GenerateCB genCB, void* pBase){
+  for(uint8_t r = 0; r < BOARD_ROWS; r++){
+    for(uint8_t c = 0; c < BOARD_COLS; c++){
+      tLocation loc = Board_CoordsToLocation(c, r);
+
+      if(Piece_isWhite(pBoard, loc) == pBoard->whiteToMove){
+        const tPieceMethodes* methodes = Piece_GetMethodes(pBoard, loc);
+        if(methodes != NULL){
+          methodes->generateMoves(pBoard, loc, genCB, pBase);
+        }
+      }
+    }
+  }
 }
 
 // --------------------

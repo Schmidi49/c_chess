@@ -29,7 +29,7 @@ void treeVisitor(void* pData, size_t depth){
   char* begin = Board_LocationToStr(pos->moveToReach.begin);
   char* end = Board_LocationToStr(pos->moveToReach.end);
 
-  printf("%s - %s\n", begin, end);
+  printf("%c %s - %s\n", pos->moveToReach.movingPiece,begin, end);
 
   free(begin);
   free(end);
@@ -50,7 +50,7 @@ void treeInserter(void* pData, tMove* move){
   char* begin = Board_LocationToStr(move->begin);
   char* end = Board_LocationToStr(move->end);
 
-  printf("Inserted move from %s to %s into the tree\n", begin, end);
+  printf("Inserted move of %c from %s to %s into the tree\n", move->movingPiece, begin, end);
 
   free(begin);
   free(end);
@@ -60,22 +60,14 @@ void treeInserter(void* pData, tMove* move){
 
 int main(){
   tGame game;
-  tDlList_List list;
   Game_Init(&game);
-  DlList_Init(&list);
-
-  tLocation loc = Board_CoordsToLocation(5, 2);
-  int i = *(uint8_t *)(&(loc));
-  char *p = *(game.currentBoard.squares_kind) + i;
-  char c = (*(p));
-  tPieceMethodes const* m = Game_GetMethodes(AT(game.currentBoard.squares_kind, loc));
 
   tPosition* initialPos = Position_New();
   initialPos->board = game.currentBoard;
   tPolyTree_Node* pTree = PolyTree_New(initialPos);
 
   printf("Inserting into tree:\n");
-  m->generateMoves(&game.currentBoard, loc, treeInserter, pTree);
+  Board_GenerateMoves(&game.currentBoard, treeInserter, pTree);
 
   printf("\nVisiting tree\n");
   PolyTree_VisitPreOrder(pTree, treeVisitor);

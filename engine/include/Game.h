@@ -23,8 +23,8 @@ typedef struct tLocation{
   uint8_t: 2;
 }tLocation;
 
-#include "Board.h"
 #include "Piece.h"
+#include "Board.h"
 #include "Move.h"
 #include "Evaluation.h"
 #include "Position.h"
@@ -42,7 +42,5 @@ typedef struct tGame{
 }tGame;
 
 void Game_Init(tGame* pGame);
-
-tPieceMethodes const* Game_GetMethodes(tPieceType kind);
 
 #endif //C_CHESS_GAME_H
