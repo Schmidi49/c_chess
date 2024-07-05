@@ -10,6 +10,7 @@
 #define C_CHESS_POSITION_H
 
 #include "Game.h"
+#include "PolynaryTree.h"
 
 typedef enum eResult{
   NoWin = 0,
@@ -36,5 +37,7 @@ typedef struct tPosition{
 
 tPosition* Position_New(void);
 void Position_Init(tPosition* pPos);
+
+void Position_GenerateMoveTree(tPolyTree_Node* pRoot, tBoard* pBoard, const size_t depth);
 
 #endif //C_CHESS_POSITION_H

@@ -13,7 +13,7 @@ const tPieceMethodes Rook_MethodeTable = {
 // --------------------
 // forward declarations
 // --------------------
-bool finishMove(int col, int row, tBoard* pBoard, tMove* pMove, Piece_GenerateCB genCB, void* pBase);
+static bool finishMove(int col, int row, tBoard* pBoard, tMove* pMove, Piece_GenerateCB genCB, void* pBase);
 
 
 // --------------------
@@ -57,7 +57,7 @@ void Rook_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
 // --------------------
 // internal function definitions
 // --------------------
-bool finishMove(int col, int row, tBoard* pBoard, tMove* pMove, Piece_GenerateCB genCB, void* pBase){
+static bool finishMove(int col, int row, tBoard* pBoard, tMove* pMove, Piece_GenerateCB genCB, void* pBase){
   pMove->end = Board_CoordsToLocation(col, row);
   pMove->takenPiece = AT(pBoard->squares_kind, pMove->end);
   pMove->takenID = AT(pBoard->squares_id, pMove->end);

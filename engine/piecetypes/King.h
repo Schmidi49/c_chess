@@ -15,7 +15,12 @@ int32_t King_GetValue(tBoard* pBoard, tLocation loc);
 
 void King_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, void* pBase);
 
+typedef struct tKing_MoveInc{
+  int8_t colinc;
+  int8_t rowinc;
+}tKing_MoveInc;
+
 extern const tPieceMethodes King_MethodeTable;
-extern const tLocation King_MovePattern[KING_MOVES];
+extern const tKing_MoveInc King_MovePattern[KING_MOVES];
 
 #endif //C_CHESS_KING_H

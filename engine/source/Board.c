@@ -10,7 +10,7 @@
 // --------------------
 // forward declarations
 // --------------------
-bool SquareAttackedBy(tBoard* pBoard, tLocation loc, bool whiteAttacks);
+static bool SquareAttackedBy(tBoard* pBoard, tLocation loc, bool whiteAttacks);
 
 // --------------------
 // header function definitions
@@ -67,8 +67,10 @@ char* Board_LocationToStr(tLocation loc){
 }
 
 void Board_Advance(tBoard* pBoard, tMove* pMove){
-  pBoard->squares_id[pMove->end.row][pMove->end.col] = AT(pBoard->squares_id, pMove->begin);
-  pBoard->squares_kind[pMove->end.row][pMove->end.col] = pMove->movingPiece;
+  pBoard->squares_id[pMove->end.col][pMove->end.row] = AT(pBoard->squares_id, pMove->begin);
+  pBoard->squares_kind[pMove->end.col][pMove->end.row] = pMove->movingPiece;
+  pBoard->squares_id[pMove->begin.col][pMove->begin.row] = cNoID;
+  pBoard->squares_kind[pMove->begin.col][pMove->begin.row] = cNoPiece;
 
   if(pMove->movingPiece == cWhiteKing){
     pBoard->whiteKing = pMove->end;
@@ -98,7 +100,7 @@ void Board_GenerateMoves(tBoard* pBoard, Piece_GenerateCB genCB, void* pBase){
 // --------------------
 // internal function definitions
 // --------------------
-bool SquareAttackedBy(tBoard* pBoard, tLocation loc, bool whiteAttacks){
+static bool SquareAttackedBy(tBoard* pBoard, tLocation loc, bool whiteAttacks){
   int i;
 
   // up

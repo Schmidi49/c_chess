@@ -198,6 +198,18 @@ void PolyTree_VisitPreOrderDepth(tNode* pRoot, PolyTree_VisitorCB visitor, size_
   }
 }
 
+void PolyTree_VisitLeafs(tPolyTree_Node* pRoot, PolyTree_VisitorCB visitor, size_t depth){
+  tNode* pCur;
+  IF_NULL_RETURN(pRoot)
+
+  //iterate threw leafs
+  pCur = pRoot->pFirst;
+  while(pCur != NULL){
+    visitor(pCur, 0);
+    pCur = pCur->pNext;
+  }
+}
+
 tNode* PolyTree_Find(tNode* pRoot, void* pItem, PolyTree_CompareCB comp){
   tNode* pCur;
   IF_NULL_RETURN_NULL(pRoot)

@@ -98,6 +98,11 @@ void PolyTree_VisitPreOrder(tPolyTree_Node* pRoot, PolyTree_VisitorCB visitor);
 /// @param visitor visitor callback which gets called with each nodes data and depth
 /// @param depth starting depth
 void PolyTree_VisitPreOrderDepth(tPolyTree_Node* pRoot, PolyTree_VisitorCB visitor, size_t depth);
+/// @brief visits all nodes of tree, always root before the leafs. starts with a not default depth
+/// @param pRoot root pointer
+/// @param visitor visitor callback which gets called with each nodes data and depth
+/// @param depth an arbitrary operator which gets only passed threw to the visitor
+void PolyTree_VisitLeafs(tPolyTree_Node* pRoot, PolyTree_VisitorCB visitor, size_t depth);
 
 /// @brief finds the first node only in the leafs of the root node (does not search recursively)
 /// @note if no compare function is passed, the default compare is by the pointers addresses themself
