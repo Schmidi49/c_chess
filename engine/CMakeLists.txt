@@ -5,7 +5,8 @@ target_sources(PieceTypes
   PUBLIC piecetypes/Rook.c
   PUBLIC piecetypes/King.c)
 
-add_library(Engine)
+add_library(Engine
+    include/BoardViz.h)
 target_include_directories(Engine PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include)
 target_include_directories(Engine PRIVATE ${CMAKE_CURRENT_LIST_DIR}/piecetypes)
 target_link_libraries(Engine
@@ -14,6 +15,7 @@ target_link_libraries(Engine
 target_sources(Engine
   PRIVATE source/Game.c
   PRIVATE source/Board.c
+  PRIVATE source/BoardViz.c
   PRIVATE source/Move.c
   PRIVATE source/Piece.c
   PRIVATE source/Evaluation.c

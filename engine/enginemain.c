@@ -9,6 +9,7 @@
 #include "include/Game.h"
 #include "DoubleLinkedList.h"
 #include "PolynaryTree.h"
+#include "BoardViz.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,7 +23,7 @@ void treeVisitor(void* pData, size_t depth){
   }
 
   if(pos->moveToReach.type == no_move){
-    printf("nomove\n");
+    printf("<init>\n");
     return;
   }
 
@@ -40,13 +41,14 @@ void treeVisitor(void* pData, size_t depth){
 int main(){
   tGame game;
   Game_Init(&game);
+  BoardViz_PrintBoard(&game.currentBoard, stdout);
 
   tPolyTree_Node* pTree = PolyTree_New(NULL);
 
-  printf("Inserting into tree:\n");
+  printf("\nInserting into tree...\n");
   Position_GenerateMoveTree(pTree, &game.currentBoard, 3);
 
-  printf("\nVisiting tree\n");
+  printf("\nVisiting tree:\n");
   PolyTree_VisitPreOrder(pTree, treeVisitor);
 
   return 0;
