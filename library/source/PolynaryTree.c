@@ -36,7 +36,9 @@ static void freeSubtreeWithoutData(tNode* pRoot);
 // header function definitions
 // --------------------
 tNode* PolyTree_New(void* pData){
-  tNode* pNewRoot = malloc(sizeof(tNode));
+  tNode* pNewRoot;
+  ALLOC(pNewRoot, sizeof(tNode))
+
   PolyTree_Init(pNewRoot, pData);
   return pNewRoot;
 }
@@ -53,7 +55,7 @@ void PolyTree_Init(tNode* pRoot, void* pData){
 tNode* PolyTree_PushBack(tNode* pRoot, void* pData){
   tNode* pNewNode;
   IF_NULL_RETURN_NULL(pRoot)
-  ALLOC(pNewNode)
+  ALLOC(pNewNode, sizeof(tNode))
 
   //change general pointers
   pNewNode->pData = pData;

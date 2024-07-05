@@ -27,6 +27,7 @@ void Rook_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
   tMove move = {
     .begin = loc,
     .movingPiece = AT(pBoard->squares_kind, loc),
+    .movingID = AT(pBoard->squares_id, loc),
     .promotion_rook = false};
   //upwards
   c = loc.col;
@@ -58,6 +59,7 @@ void Rook_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
 bool finishMove(int col, int row, tBoard* pBoard, tMove* pMove, Piece_GenerateCB genCB, void* pBase){
   pMove->end = Board_CoordsToLocation(col, row);
   pMove->takenPiece = AT(pBoard->squares_kind, pMove->end);
+  pMove->takenID = AT(pBoard->squares_id, pMove->end);
   if(pMove->takenPiece == cNoPiece){
     pMove->type = piece_move;
     genCB(pBase, pMove);

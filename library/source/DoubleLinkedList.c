@@ -24,7 +24,8 @@ typedef tDlList_Node tNode;
 // --------------------
 tList* DlList_New(void){
   //allocate memory
-  tList* pNewList = malloc(sizeof(tList));
+  tList* pNewList;
+  ALLOC(pNewList, sizeof(tList))
   //initialize list
   DlList_Init(pNewList);
   return pNewList;

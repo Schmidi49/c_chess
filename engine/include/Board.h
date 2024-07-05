@@ -6,6 +6,7 @@
 #define C_CHESS_BOARD_H
 
 #include "Game.h"
+#include "Move.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -34,5 +35,8 @@ bool Board_KingCaptureable(tBoard* pBoard);
 tLocation Board_CoordsToLocation(uint8_t col, uint8_t row);
 
 char* Board_LocationToStr(tLocation loc);
+
+// no validation for the move
+void Board_Advance(tBoard* pBoard, tMove* pMove);
 
 #endif //C_CHESS_BOARD_H

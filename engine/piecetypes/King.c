@@ -39,6 +39,7 @@ void King_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
   tMove move = {
     .begin = loc,
     .movingPiece = AT(pBoard->squares_kind, loc),
+    .movingID = AT(pBoard->squares_id, loc),
     .promotion_rook = false};
 
   for(i = 0; i < 8; i++){
@@ -54,6 +55,7 @@ void King_GenerateMoves(tBoard* pBoard, tLocation loc, Piece_GenerateCB genCB, v
 
     move.end = Board_CoordsToLocation(c, r);
     move.takenPiece = AT(pBoard->squares_kind, move.end);
+    move.takenID = AT(pBoard->squares_id, move.end);
     if(move.takenPiece == cNoPiece){
       move.type = piece_move;
     }

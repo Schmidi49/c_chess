@@ -59,6 +59,20 @@ char* Board_LocationToStr(tLocation loc){
   return pChar;
 }
 
+void Board_Advance(tBoard* pBoard, tMove* pMove){
+  pBoard->squares_id[pMove->end.row][pMove->end.col] = AT(pBoard->squares_id, pMove->begin);
+  pBoard->squares_kind[pMove->end.row][pMove->end.col] = pMove->movingPiece;
+
+  if(pMove->movingPiece == cWhiteKing){
+    pBoard->whiteKing = pMove->end;
+  }
+  else if(pMove->movingPiece == cBlackKing){
+    pBoard->blackKing = pMove->end;
+  }
+
+  pBoard->whiteToMove = !pBoard->whiteToMove;
+}
+
 // --------------------
 // internal function definitions
 // --------------------

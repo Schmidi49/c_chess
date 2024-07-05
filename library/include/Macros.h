@@ -15,7 +15,7 @@
 #define IF_NULL_RETURN_NULL(p) if(p == NULL){return NULL;}
 #define IF_NULL_RETURN_VAL(p, val) if(p == NULL){return val;}
 
-#define ALLOC(p)  p = malloc(sizeof &p); IF_NULL_RETURN_NULL(p)
+#define ALLOC(p, len)  p = malloc(len); IF_NULL_RETURN_NULL(p)
 
 
 #endif //C_CHESS_MACROS_H

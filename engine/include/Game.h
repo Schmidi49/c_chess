@@ -32,6 +32,7 @@ typedef struct tLocation{
 //forward typedef
 typedef struct tBoard tBoard;
 typedef struct tPiece tPiece;
+typedef struct tMove tMove;
 
 typedef struct tGame{
   tBoard currentBoard;

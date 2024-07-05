@@ -25,13 +25,16 @@ typedef enum eResult{
 typedef struct tPosition{
   tBoard board;
   tEvaluation eval;
+  eResult result;
 
   struct tPosition* pPrevPos;
   struct tPosition* pBestContinuation;
   tMove moveToBest;
   tMove moveToReach;
 
-  eResult result;
 } tPosition;
+
+tPosition* Position_New(void);
+void Position_Init(tPosition* pPos);
 
 #endif //C_CHESS_POSITION_H
